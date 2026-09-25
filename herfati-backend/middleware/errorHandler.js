@@ -1,0 +1,16 @@
+// Catches errors thrown anywhere in the app (including inside asyncHandler)
+// and returns a consistent JSON error shape instead of leaking a stack trace.
+const notFound = (req, res, next) => {
+  res.status(404);
+  next(new Error(`المسار غير موجود: ${req.originalUrl}`));
+};
+
+const errorHandler = (err, req, res, next) => {
+  const statusCode = res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
+  res.status(statusCode).json({
+    message: err.message || 'حدث خطأ في الخادم',
+    stack: process.env.NODE_ENV === 'production' ? undefined : err.stack,
+  });
+};
+
+module.exports = { notFound, errorHandler };

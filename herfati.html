@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>حرفتي | Herfati</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#241f1a; --paper:#f6efe2; --teal:#1c3b3a; --teal-d:#122726;
+  --ochre:#c98a3e; --rust:#a1452a; --line: rgba(36,31,26,.18);
+  --card:#fffdf8;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+html,body{margin:0; background:var(--paper); color:var(--ink); font-family:'Tajawal',sans-serif;}
+img{max-width:100%}
+h1,h2,h3{font-family:'Amiri',serif; margin:0; line-height:1.25;}
+p{margin:0}
+.wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+header{position:sticky; top:0; z-index:20; background:var(--paper); border-bottom:1px solid var(--line); padding-top:env(safe-area-inset-top,0px);}
+.nav{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; max-width:1080px; margin:0 auto; gap:14px; flex-wrap:wrap;}
+.brand{display:flex; align-items:center; gap:10px; font-family:'Amiri',serif; font-size:1.4rem; font-weight:700; color:var(--teal-d);}
+.mark{width:26px; height:26px; border:2px solid var(--ochre); transform:rotate(45deg); display:inline-block; position:relative;}
+.mark::after{content:""; position:absolute; inset:5px; border:1.5px solid var(--rust);}
+.navlinks{display:flex; gap:22px; font-size:.92rem; color:var(--teal-d);}
+.navlinks a{color:inherit; text-decoration:none; border-bottom:2px solid transparent; padding-bottom:3px;}
+.navlinks a:hover{border-color:var(--ochre)}
+@media (max-width:760px){.navlinks{display:none}}
+.authbar{display:flex; align-items:center; gap:10px;}
+.authbar .who{font-size:.85rem; color:var(--teal-d)}
+.authbar .who b{color:var(--rust)}
+.cart-btn{position:relative; background:none; border:1px solid var(--teal-d); color:var(--teal-d); padding:8px 14px; cursor:pointer; font-family:'Tajawal',sans-serif; font-size:.85rem;}
+.cart-badge{position:absolute; top:-8px; left:-8px; background:var(--rust); color:#fff; font-size:.7rem; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center;}
+
+.hero{padding:52px 0 36px; border-bottom:1px solid var(--line);}
+.hero-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:center;}
+@media (max-width:800px){.hero-grid{grid-template-columns:1fr}}
+.eyebrow{color:var(--rust); font-weight:700; font-size:.95rem; margin-bottom:10px;}
+.hero h1{font-size:clamp(2rem,4vw,2.9rem); color:var(--teal-d); max-width:14ch;}
+.hero p.lede{margin-top:16px; font-size:1.05rem; max-width:52ch; color:#3a332b;}
+.hero .cta-row{margin-top:24px; display:flex; gap:14px; flex-wrap:wrap;}
+.btn{border:none; cursor:pointer; font-family:'Tajawal',sans-serif; font-weight:700; font-size:.95rem; padding:12px 24px;}
+.btn-primary{background:var(--teal-d); color:var(--paper);}
+.btn-primary:hover{background:var(--teal)}
+.btn-outline{background:transparent; border:1.5px solid var(--teal-d); color:var(--teal-d);}
+.btn-outline:hover{background:var(--teal-d); color:var(--paper)}
+.weave{aspect-ratio:1/1; width:100%;}
+
+.section{padding:48px 0; border-bottom:1px solid var(--line);}
+.sec-head{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; margin-bottom:26px; flex-wrap:wrap;}
+.sec-head h2{font-size:1.8rem; color:var(--teal-d);}
+.sec-head p{color:#5a5248; max-width:40ch;}
+
+.filters{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px;}
+.chip{border:1px solid var(--teal-d); background:transparent; color:var(--teal-d); padding:7px 16px; font-size:.85rem; cursor:pointer; font-family:'Tajawal',sans-serif;}
+.chip.active{background:var(--teal-d); color:var(--paper)}
+
+.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+@media (max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card); border:1px solid var(--line); display:flex; flex-direction:column;}
+.thumb{aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; font-size:2.4rem; border-bottom:1px solid var(--line);}
+.card .body{padding:16px;}
+.card h3{font-size:1.02rem; margin-bottom:4px;}
+.card .maker{font-size:.8rem; color:#7a7264; margin-bottom:10px;}
+.card .row{display:flex; justify-content:space-between; align-items:center;}
+.price{font-weight:700; color:var(--rust);}
+.add{background:none; border:1px solid var(--teal-d); color:var(--teal-d); font-size:.8rem; padding:6px 12px; cursor:pointer;}
+.add:hover{background:var(--teal-d); color:var(--paper)}
+.empty{color:#7a7264; font-size:.9rem; padding:20px 0;}
+
+.camp{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+@media (max-width:760px){.camp{grid-template-columns:1fr}}
+.camp-card{border:1px solid var(--line); background:var(--card); padding:20px;}
+.camp-card h3{font-size:1.1rem; margin-bottom:6px;}
+.camp-card .who{font-size:.85rem; color:#7a7264; margin-bottom:14px;}
+.bar{height:8px; background:#e7ddc9; margin-bottom:8px; position:relative;}
+.bar i{display:block; height:100%; background:var(--ochre);}
+.camp-nums{display:flex; justify-content:space-between; font-size:.85rem; color:#5a5248; margin-bottom:14px;}
+.camp-nums b{color:var(--teal-d)}
+.support{width:100%; background:var(--rust); color:#fff; border:none; padding:10px; font-weight:700; cursor:pointer;}
+.support:hover{background:#8a3a22}
+
+.panel{background:var(--card); border:1px solid var(--line); padding:22px; margin-top:8px;}
+.panel h3{font-size:1.1rem; margin-bottom:14px; color:var(--teal-d)}
+.field{display:flex; flex-direction:column; gap:5px; margin-bottom:12px;}
+.field label{font-size:.8rem; color:#5a5248}
+.field input, .field textarea, .field select{border:1px solid var(--line); background:#fff; padding:9px 11px; font-family:'Tajawal',sans-serif; font-size:.9rem;}
+.field textarea{resize:vertical; min-height:70px}
+.form-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+@media (max-width:600px){.form-row{grid-template-columns:1fr}}
+
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+.step{border-top:3px solid var(--ochre); padding-top:14px;}
+.step h3{font-size:1.1rem; margin-bottom:8px; color:var(--teal-d);}
+.step p{color:#5a5248; font-size:.92rem;}
+
+footer{padding:32px 0; text-align:center; color:#7a7264; font-size:.85rem;}
+
+.toast{position:fixed; bottom:24px; right:50%; transform:translateX(50%); background:var(--teal-d); color:var(--paper); padding:12px 24px; font-size:.9rem; opacity:0; pointer-events:none; transition:opacity .25s; z-index:60; max-width:90vw; text-align:center;}
+.toast.show{opacity:1;}
+
+.overlay{position:fixed; inset:0; background:rgba(18,39,38,.55); display:none; align-items:center; justify-content:center; z-index:100; padding:20px;}
+.overlay.open{display:flex;}
+.modal{background:var(--paper); border:1px solid var(--line); max-width:420px; width:100%; max-height:90vh; overflow:auto; padding:26px;}
+.modal h3{margin-bottom:16px; color:var(--teal-d)}
+.modal-close{float:left; background:none; border:none; font-size:1.3rem; cursor:pointer; color:var(--teal-d)}
+.tabs{display:flex; gap:8px; margin-bottom:16px;}
+.tab{flex:1; padding:9px; text-align:center; border:1px solid var(--teal-d); background:transparent; color:var(--teal-d); cursor:pointer; font-family:'Tajawal',sans-serif; font-size:.9rem;}
+.tab.active{background:var(--teal-d); color:var(--paper)}
+.hidden{display:none !important}
+.cart-item{display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); font-size:.9rem;}
+.cart-total{display:flex; justify-content:space-between; font-weight:700; padding:14px 0; color:var(--teal-d)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand"><span class="mark"></span> حرفتي</div>
+    <nav class="navlinks">
+      <a href="#market">السوق</a>
+      <a href="#fund">التمويل</a>
+      <a href="#panel">لوحة الحرفي</a>
+    </nav>
+    <div class="authbar" id="authbar"></div>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">منصة وحاضنة رقمية · متصلة بالباك إند</div>
+      <h1>سوق يفتح أمام الحرفيين حدود ما كانوا يصلوا لها</h1>
+      <p class="lede">حرفتي حاضنة ومتجر إلكتروني تربط الأسر المنتجة والحرفيين الأقل حظًا بأسواق وممولين خارج نطاقهم المحلي. البيانات هنا حية وبتتحدث فعليًا مع الباك إند.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="document.getElementById('market').scrollIntoView()">تصفح المنتجات</button>
+        <button class="btn btn-outline" onclick="openAuth('register')">سجّل كحرفي/ة</button>
+      </div>
+    </div>
+    <svg class="weave" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#1c3b3a" stroke-width="1" opacity="0.5"><path d="M0 20 H200 M0 60 H200 M0 100 H200 M0 140 H200 M0 180 H200"/></g>
+      <g stroke="#c98a3e" stroke-width="2"><path d="M20 0 V200 M100 0 V200 M180 0 V200"/></g>
+      <g fill="#a1452a">
+        <circle cx="20" cy="20" r="5"/><circle cx="100" cy="20" r="5"/><circle cx="180" cy="20" r="5"/>
+        <circle cx="20" cy="100" r="5"/><circle cx="100" cy="100" r="5"/><circle cx="180" cy="100" r="5"/>
+        <circle cx="20" cy="180" r="5"/><circle cx="100" cy="180" r="5"/><circle cx="180" cy="180" r="5"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="section wrap" id="market">
+  <div class="sec-head">
+    <div><h2>سوق المنتجات</h2><p>منتجات حقيقية مسحوبة من قاعدة البيانات عبر /api/products.</p></div>
+  </div>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid"><p class="empty">جارِ تحميل المنتجات…</p></div>
+</section>
+
+<section class="section wrap" id="fund">
+  <div class="sec-head">
+    <div><h2>حملات تمويل نشطة</h2><p>ادعم صانعًا مباشرة عبر /api/campaigns/:id/contribute.</p></div>
+  </div>
+  <div class="camp" id="camps"><p class="empty">جارِ تحميل الحملات…</p></div>
+</section>
+
+<section class="section wrap" id="panel">
+  <div class="sec-head"><div><h2>لوحة الحرفي</h2><p>متاحة فقط بعد تسجيل الدخول كحرفي/ة.</p></div></div>
+  <div id="panel-locked" class="empty">سجّل دخولك كحرفي/ة (من زر "تسجيل الدخول" فوق) عشان تضيف منتج أو تفتح حملة تمويل.</div>
+  <div id="panel-open" class="hidden">
+    <div class="panel">
+      <h3>إضافة منتج جديد</h3>
+      <form id="productForm">
+        <div class="form-row">
+          <div class="field"><label>اسم المنتج</label><input required name="name"></div>
+          <div class="field"><label>الفئة</label><input required name="category" placeholder="نسيج، فخار..."></div>
+        </div>
+        <div class="field"><label>الوصف</label><textarea name="description"></textarea></div>
+        <div class="form-row">
+          <div class="field"><label>السعر (ج.م)</label><input required type="number" min="0" name="price"></div>
+          <div class="field"><label>الكمية المتاحة</label><input required type="number" min="0" name="stock" value="1"></div>
+        </div>
+        <button class="btn btn-primary" type="submit">أضف المنتج</button>
+      </form>
+    </div>
+    <div class="panel">
+      <h3>فتح حملة تمويل</h3>
+      <form id="campaignForm">
+        <div class="field"><label>عنوان الحملة</label><input required name="title"></div>
+        <div class="field"><label>قصة المشروع</label><textarea required name="story"></textarea></div>
+        <div class="form-row">
+          <div class="field"><label>المبلغ المطلوب (ج.م)</label><input required type="number" min="1" name="goalAmount"></div>
+          <div class="field"><label>آخر موعد</label><input required type="date" name="deadline"></div>
+        </div>
+        <button class="btn btn-primary" type="submit">افتح الحملة</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" style="border-bottom:none">
+  <div class="sec-head"><div><h2>كيف تعمل المنصة</h2></div></div>
+  <div class="steps">
+    <div class="step"><h3>١. يسجّل الحرفي</h3><p>يفتح متجرًا مجانيًا ويعرض منتجاته أو مشروعًا يحتاج تمويله.</p></div>
+    <div class="step"><h3>٢. يصل للسوق</h3><p>المشتري والممول من أي مكان يكتشفون العمل ويطّلعون على قصته.</p></div>
+    <div class="step"><h3>٣. يصل العائد كاملاً</h3><p>الدخل يذهب للحرفي مباشرة، والمنصة تكتفي برسوم تشغيل رمزية.</p></div>
+  </div>
+</section>
+
+<footer class="wrap">منصة حرفتي — نموذج متصل بباك إند Node/Express/MongoDB · Herfati Prototype</footer>
+<div class="toast" id="toast"></div>
+
+<!-- Auth Modal -->
+<div class="overlay" id="authOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('authOverlay')">×</button>
+    <div class="tabs">
+      <button class="tab active" id="tabLogin" onclick="switchTab('login')">تسجيل الدخول</button>
+      <button class="tab" id="tabRegister" onclick="switchTab('register')">حساب جديد</button>
+    </div>
+    <form id="loginForm">
+      <div class="field"><label>البريد الإلكتروني</label><input required type="email" name="email"></div>
+      <div class="field"><label>كلمة المرور</label><input required type="password" name="password"></div>
+      <button class="btn btn-primary" style="width:100%" type="submit">دخول</button>
+    </form>
+    <form id="registerForm" class="hidden">
+      <div class="field"><label>الاسم</label><input required name="name"></div>
+      <div class="field"><label>البريد الإلكتروني</label><input required type="email" name="email"></div>
+      <div class="field"><label>كلمة المرور</label><input required type="password" name="password" minlength="6"></div>
+      <div class="field"><label>نوع الحساب</label>
+        <select name="role"><option value="buyer">مشترٍ/داعم</option><option value="artisan">حرفي/ة</option></select>
+      </div>
+      <button class="btn btn-primary" style="width:100%" type="submit">إنشاء الحساب</button>
+    </form>
+  </div>
+</div>
+
+<!-- Cart Modal -->
+<div class="overlay" id="cartOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('cartOverlay')">×</button>
+    <h3>سلة الشراء</h3>
+    <div id="cartItems"><p class="empty">السلة فارغة</p></div>
+    <div class="cart-total" id="cartTotal" style="display:none"></div>
+    <button class="btn btn-primary" style="width:100%" id="checkoutBtn">إتمام الطلب</button>
+  </div>
+</div>
+
+<script>
+const API_BASE = 'http://localhost:5000/api';
+let token = localStorage.getItem('herfati_token') || null;
+let user = JSON.parse(localStorage.getItem('herfati_user') || 'null');
+let cart = []; // {id, name, price, quantity}
+let activeCat = 'الكل';
+let allProducts = [];
+
+async function apiFetch(path, opts = {}) {
+  const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
+  if (token) headers.Authorization = `Bearer ${token}`;
+  const res = await fetch(`${API_BASE}${path}`, { ...opts, headers });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.message || 'حدث خطأ في الاتصال بالخادم');
+  return data;
+}
+
+let toastT;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2500);
+}
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function openAuth(tab){ openModal('authOverlay'); switchTab(tab); }
+function switchTab(tab){
+  const isLogin = tab === 'login';
+  document.getElementById('tabLogin').classList.toggle('active', isLogin);
+  document.getElementById('tabRegister').classList.toggle('active', !isLogin);
+  document.getElementById('loginForm').classList.toggle('hidden', !isLogin);
+  document.getElementById('registerForm').classList.toggle('hidden', isLogin);
+}
+
+function renderAuthbar(){
+  const bar = document.getElementById('authbar');
+  const cartCount = cart.reduce((s,i)=>s+i.quantity,0);
+  if (user) {
+    bar.innerHTML = `
+      <span class="who">أهلاً <b>${user.name}</b> (${user.role === 'artisan' ? 'حرفي/ة' : 'مشترٍ'})</span>
+      <button class="cart-btn" onclick="openCart()">السلة${cartCount ? `<span class="cart-badge">${cartCount}</span>`:''}</button>
+      <button class="btn btn-outline" style="padding:8px 16px" onclick="logout()">خروج</button>`;
+  } else {
+    bar.innerHTML = `
+      <button class="cart-btn" onclick="openCart()">السلة${cartCount ? `<span class="cart-badge">${cartCount}</span>`:''}</button>
+      <button class="btn btn-outline" style="padding:8px 16px" onclick="openAuth('login')">تسجيل الدخول</button>`;
+  }
+  document.getElementById('panel-locked').classList.toggle('hidden', !!(user && user.role==='artisan'));
+  document.getElementById('panel-open').classList.toggle('hidden', !(user && user.role==='artisan'));
+}
+
+function logout(){
+  token = null; user = null;
+  localStorage.removeItem('herfati_token'); localStorage.removeItem('herfati_user');
+  renderAuthbar(); showToast('تم تسجيل الخروج');
+}
+
+document.getElementById('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  try {
+    const data = await apiFetch('/auth/login', { method:'POST', body: JSON.stringify({ email: fd.get('email'), password: fd.get('password') }) });
+    token = data.token; user = { name:data.name, email:data.email, role:data.role };
+    localStorage.setItem('herfati_token', token); localStorage.setItem('herfati_user', JSON.stringify(user));
+    closeModal('authOverlay'); renderAuthbar(); showToast(`أهلاً بيك يا ${user.name}`);
+  } catch(err){ showToast(err.message); }
+});
+
+document.getElementById('registerForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  try {
+    const data = await apiFetch('/auth/register', { method:'POST', body: JSON.stringify({
+      name: fd.get('name'), email: fd.get('email'), password: fd.get('password'), role: fd.get('role')
+    })});
+    token = data.token; user = { name:data.name, email:data.email, role:data.role };
+    localStorage.setItem('herfati_token', token); localStorage.setItem('herfati_user', JSON.stringify(user));
+    closeModal('authOverlay'); renderAuthbar(); showToast('تم إنشاء الحساب بنجاح');
+  } catch(err){ showToast(err.message); }
+});
+
+// ---- Products ----
+async function loadProducts(){
+  try {
+    const q = activeCat === 'الكل' ? '' : `?category=${encodeURIComponent(activeCat)}`;
+    const data = await apiFetch(`/products${q}`);
+    allProducts = data.products || [];
+    renderGrid();
+    if (activeCat === 'الكل') buildFilters(data.products);
+  } catch(err){
+    document.getElementById('grid').innerHTML = `<p class="empty">تعذّر الاتصال بالباك إند (${err.message}). تأكد إن السيرفر شغّال على localhost:5000.</p>`;
+  }
+}
+function buildFilters(products){
+  const cats = ['الكل', ...new Set(products.map(p=>p.category))];
+  document.getElementById('filters').innerHTML = cats.map(c=>
+    `<button class="chip ${c===activeCat?'active':''}" data-c="${c}">${c}</button>`).join('');
+}
+function renderGrid(){
+  if (!allProducts.length){ document.getElementById('grid').innerHTML = '<p class="empty">لا توجد منتجات في هذه الفئة بعد.</p>'; return; }
+  document.getElementById('grid').innerHTML = allProducts.map(p => `
+    <div class="card">
+      <div class="thumb">🧺</div>
+      <div class="body">
+        <h3>${p.name}</h3>
+        <div class="maker">${p.artisan?.name || 'حرفي غير معروف'} — ${p.artisan?.region || ''}</div>
+        <div class="row"><span class="price">${p.price} ج.م</span><button class="add" onclick='addToCart(${JSON.stringify({id:p._id,name:p.name,price:p.price})})'>أضف للسلة</button></div>
+      </div>
+    </div>`).join('');
+}
+document.getElementById('filters').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if(!b) return;
+  activeCat = b.dataset.c;
+  document.querySelectorAll('#filters .chip').forEach(c=>c.classList.toggle('active', c.dataset.c===activeCat));
+  loadProducts();
+});
+
+// ---- Cart ----
+function addToCart(p){
+  const existing = cart.find(i=>i.id===p.id);
+  if (existing) existing.quantity++; else cart.push({...p, quantity:1});
+  renderAuthbar(); showToast(`أُضيف "${p.name}" إلى السلة`);
+}
+function openCart(){
+  const box = document.getElementById('cartItems');
+  const totalBox = document.getElementById('cartTotal');
+  if (!cart.length){ box.innerHTML = '<p class="empty">السلة فارغة</p>'; totalBox.style.display='none'; }
+  else {
+    box.innerHTML = cart.map(i=>`<div class="cart-item"><span>${i.name} × ${i.quantity}</span><span>${i.price*i.quantity} ج.م</span></div>`).join('');
+    const total = cart.reduce((s,i)=>s+i.price*i.quantity,0);
+    totalBox.style.display='flex'; totalBox.innerHTML = `<span>الإجمالي</span><span>${total} ج.م</span>`;
+  }
+  openModal('cartOverlay');
+}
+document.getElementById('checkoutBtn').addEventListener('click', async () => {
+  if (!cart.length) return showToast('السلة فارغة');
+  if (!token) { closeModal('cartOverlay'); return openAuth('login'); }
+  try {
+    await apiFetch('/orders', { method:'POST', body: JSON.stringify({ items: cart.map(i=>({product:i.id, quantity:i.quantity})) }) });
+    cart = []; closeModal('cartOverlay'); renderAuthbar(); showToast('تم تنفيذ الطلب بنجاح');
+  } catch(err){ showToast(err.message); }
+});
+
+// ---- Campaigns ----
+async function loadCampaigns(){
+  try {
+    const campaigns = await apiFetch('/campaigns');
+    if (!campaigns.length){ document.getElementById('camps').innerHTML = '<p class="empty">لا توجد حملات نشطة حاليًا.</p>'; return; }
+    document.getElementById('camps').innerHTML = campaigns.map(c => {
+      const pct = Math.min(100, Math.round((c.raisedAmount / c.goalAmount) * 100));
+      return `<div class="camp-card">
+        <h3>${c.title}</h3>
+        <div class="who">${c.artisan?.name || ''} — ${c.artisan?.region || ''}</div>
+        <div class="bar"><i style="width:${pct}%"></i></div>
+        <div class="camp-nums"><span><b>${c.raisedAmount}</b> ج.م من ${c.goalAmount}</span><span>${pct}٪</span></div>
+        <button class="support" onclick="contribute('${c._id}')">ادعم هذا المشروع</button>
+      </div>`;
+    }).join('');
+  } catch(err){
+    document.getElementById('camps').innerHTML = `<p class="empty">تعذّر تحميل الحملات (${err.message}).</p>`;
+  }
+}
+async function contribute(id){
+  if (!token) return openAuth('login');
+  const amount = Number(prompt('أدخل مبلغ الدعم بالجنيه:'));
+  if (!amount || amount <= 0) return;
+  try {
+    await apiFetch(`/campaigns/${id}/contribute`, { method:'POST', body: JSON.stringify({ amount }) });
+    showToast('شكرًا لدعمك! تم تسجيل مساهمتك'); loadCampaigns();
+  } catch(err){ showToast(err.message); }
+}
+
+// ---- Artisan panel ----
+document.getElementById('productForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  try {
+    await apiFetch('/products', { method:'POST', body: JSON.stringify({
+      name: fd.get('name'), category: fd.get('category'), description: fd.get('description'),
+      price: Number(fd.get('price')), stock: Number(fd.get('stock'))
+    })});
+    e.target.reset(); showToast('تم إضافة المنتج'); loadProducts();
+  } catch(err){ showToast(err.message); }
+});
+document.getElementById('campaignForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  try {
+    await apiFetch('/campaigns', { method:'POST', body: JSON.stringify({
+      title: fd.get('title'), story: fd.get('story'), goalAmount: Number(fd.get('goalAmount')), deadline: fd.get('deadline')
+    })});
+    e.target.reset(); showToast('تم فتح الحملة'); loadCampaigns();
+  } catch(err){ showToast(err.message); }
+});
+
+renderAuthbar();
+loadProducts();
+loadCampaigns();
+</script>
+</body>
+</html>
